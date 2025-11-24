@@ -58,7 +58,7 @@ jobs:
 
             - name: Run Playit.gg Tunnel
               env:
-                  PLAYIT_SECRET: ${{ secrets.PLAYIT_SECRET }}
+                  SECRET_KEY: ${{ secrets.PLAYIT_SECRET }}
               run: |
                   echo "=========================================="
                   echo "Starting Playit.gg tunnel for Minecraft"
