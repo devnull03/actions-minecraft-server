@@ -12,8 +12,9 @@ I initially tried using Cloudflare Tunnel for this project, but Cloudflare requi
 
 ### Fork and Initial Configuration
 
-1. Fork this repository to your GitHub account
-2. The forked repository will be used to store your server files and world data
+1. Fork this repository to your GitHub account from the `template` branch
+2. The `template` branch is a clean starting point with no world data or generated files
+3. Your forked repository will store your server files and world data as you play
 
 ### Setting Up Playit.gg
 
