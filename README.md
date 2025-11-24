@@ -1,5 +1,14 @@
 # Minecraft Server on GitHub Actions
 
+<div align="center">
+
+[![Server Run](https://github.com/AdamRaichu/actions-minecraft-server/actions/workflows/server.yml/badge.svg)](https://github.com/AdamRaichu/actions-minecraft-server/actions/workflows/server.yml)
+[![Setup Server](https://github.com/AdamRaichu/actions-minecraft-server/actions/workflows/setup.yml/badge.svg)](https://github.com/AdamRaichu/actions-minecraft-server/actions/workflows/setup.yml)
+
+**[🚀 Start Server](../../actions/workflows/server.yml)** • **[⚙️ Setup Server](../../actions/workflows/setup.yml)**
+
+</div>
+
 This project allows you to run a public Minecraft server on GitHub Actions using Playit.gg for tunneling. The server runs for free on GitHub's infrastructure and provides a permanent public address that players can connect to without installing any additional software.
 
 This repository is forked from [AdamRaichu/actions-minecraft-server](https://github.com/AdamRaichu/actions-minecraft-server). The key improvement is replacing remote.it with Playit.gg, which eliminates the requirement for players to install client software. Players can connect directly using a standard Minecraft client.
