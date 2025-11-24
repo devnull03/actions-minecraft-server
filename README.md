@@ -2,8 +2,8 @@
 
 <div align="center">
 
-[![Server Run](https://github.com/AdamRaichu/actions-minecraft-server/actions/workflows/server.yml/badge.svg)](https://github.com/AdamRaichu/actions-minecraft-server/actions/workflows/server.yml)
-[![Setup Server](https://github.com/AdamRaichu/actions-minecraft-server/actions/workflows/setup.yml/badge.svg)](https://github.com/AdamRaichu/actions-minecraft-server/actions/workflows/setup.yml)
+[![Server Run](https://github.com/devnull03/actions-minecraft-server/actions/workflows/server.yml/badge.svg)](https://github.com/devnull03/actions-minecraft-server/actions/workflows/server.yml)
+[![Setup Server](https://github.com/devnull03/actions-minecraft-server/actions/workflows/setup.yml/badge.svg)](https://github.com/devnull03/actions-minecraft-server/actions/workflows/setup.yml)
 
 **[🚀 Start Server](../../actions/workflows/server.yml)** • **[⚙️ Setup Server](../../actions/workflows/setup.yml)**
 
@@ -93,4 +93,4 @@ Players connect using the permanent Playit.gg address in their Minecraft multipl
 
 ## Credits
 
-Original repository by [AdamRaichu](https://github.com/AdamRaichu/actions-minecraft-server). Modified to use Playit.gg instead of remote.it for public access. Cloudflare Tunnel was initially attempted but required paid services or client software, so Playit.gg was chosen as a free alternative.
+Original repository by @AdamRaichu. Modified to use Playit.gg instead of remote.it for public access. Cloudflare Tunnel was initially attempted but required paid services or client software, so Playit.gg was chosen as a free alternative.
