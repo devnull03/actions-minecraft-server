@@ -48,7 +48,7 @@ jobs:
               with:
                   java-version: 21
                   distribution: "microsoft"
-                  
+
             - name: Run Playit.gg Tunnel (Docker)
               run: |
                   echo "=========================================="
@@ -65,11 +65,19 @@ jobs:
               # Setting this prevents progress from being lost by forgetting to stop the server.
               timeout-minutes: 320
               continue-on-error: true
-            - name: Save to GitHub
+            - name: Save World and Server Data to GitHub
               run: |
                   git pull
                   git config user.name github-actions
                   git config user.email actions@github.com
-                  git add .
-                  git commit -m "$(cat commit-message.txt)"
+                  git add world/
+                  git add logs/
+                  git add *.json
+                  git add *.properties
+                  git add *.txt
+                  git add banned-*.json
+                  git add ops.json
+                  git add whitelist.json
+                  git add usercache.json
+                  git commit -m "$(cat commit-message.txt)" || echo "No changes to commit"
                   git push
