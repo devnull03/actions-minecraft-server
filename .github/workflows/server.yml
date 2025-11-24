@@ -48,25 +48,15 @@ jobs:
               with:
                   java-version: 21
                   distribution: "microsoft"
-            # - name: Install remote.it
-            #   run: R3_REGISTRATION_CODE="${{ secrets.REMOTEIT_CODE }}" sh -c "$(curl -L https://downloads.remote.it/remoteit/install_agent.sh)"
-            - name: Install Playit.gg
-              run: |
-                  curl -SsL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/playit.gpg >/dev/null
-                  echo "deb [signed-by=/etc/apt/trusted.gpg.d/playit.gpg] https://playit-cloud.github.io/ppa/data ./" | sudo tee /etc/apt/sources.list.d/playit-cloud.list
-                  sudo apt update && sudo apt install playit
-
-            - name: Run Playit.gg Tunnel
-              env:
-                  SECRET_KEY: ${{ secrets.PLAYIT_SECRET }}
+                  
+            - name: Run Playit.gg Tunnel (Docker)
               run: |
                   echo "=========================================="
                   echo "Starting Playit.gg tunnel for Minecraft"
                   echo "=========================================="
-                  playit &
+                  docker run -d --network host -e SECRET_KEY=${{ secrets.PLAYIT_SECRET }} ghcr.io/playit-cloud/playit-agent:0.16
                   sleep 10
-                  echo "Tunnel started! Check https://playit.gg/account/tunnels for connection address"
-                  echo "==========================================="
+                  echo "\n==========================================="
 
             - name: Run Server (Long)
               id: run_server
