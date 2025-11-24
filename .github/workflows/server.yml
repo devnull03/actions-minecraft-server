@@ -52,9 +52,9 @@ jobs:
             #   run: R3_REGISTRATION_CODE="${{ secrets.REMOTEIT_CODE }}" sh -c "$(curl -L https://downloads.remote.it/remoteit/install_agent.sh)"
             - name: Install Cloudflare Tunnel
               run: |
-                  mkdir -p --mode=0755 /usr/share/keyrings
+                  # mkdir -p --mode=0755 /usr/share/keyrings
                   curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
-                  echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+                  # echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
                   apt-get update && sudo apt-get install cloudflared
             - name: Run Cloudflare Tunnel
               run: cloudflared tunnel run --token ${{ secrets.CLOUDFLARE_TOKEN }}
