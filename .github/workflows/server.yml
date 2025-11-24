@@ -52,12 +52,17 @@ jobs:
             #   run: R3_REGISTRATION_CODE="${{ secrets.REMOTEIT_CODE }}" sh -c "$(curl -L https://downloads.remote.it/remoteit/install_agent.sh)"
             - name: Install Cloudflare Tunnel
               run: |
-                  sudo mkdir -p --mode=0755 /usr/share/keyrings
-                  sudo curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
-                  echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
-                  sudo apt-get update && sudo apt-get install cloudflared
+                  curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+                  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+                  sudo apt-get update && sudo apt-get install cloudflare-warp
+                  
+                  sudo sysctl -w net.ipv4.ip_forward=1
+                  
             - name: Run Cloudflare Tunnel
-              run: cloudflared tunnel run --token ${{ secrets.CLOUDFLARE_TOKEN }} &
+              run: |
+                  warp-cli connector new  ${{secrets.CLOUDFLARE_TOKEN}}
+                  warp-cli connect
+
             - name: Run Server (Long)
               id: run_server
               run: ${{inputs.should_add_op && 'printf "op ' || ''}}${{inputs.should_add_op && inputs.op_name || ''}}${{inputs.should_add_op && '" | ' || ''}}java -Xmx6G -jar fabric-server-mc.1.21.10-loader.0.18.1-launcher.1.1.0.jar nogui
