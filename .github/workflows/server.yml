@@ -50,18 +50,23 @@ jobs:
                   distribution: "microsoft"
             # - name: Install remote.it
             #   run: R3_REGISTRATION_CODE="${{ secrets.REMOTEIT_CODE }}" sh -c "$(curl -L https://downloads.remote.it/remoteit/install_agent.sh)"
-            - name: Install Cloudflare Tunnel
+            - name: Install Playit.gg
               run: |
-                  curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
-                  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
-                  sudo apt-get update && sudo apt-get install cloudflare-warp
-                  
-                  sudo sysctl -w net.ipv4.ip_forward=1
-                  
-            - name: Run Cloudflare Tunnel
+                  curl -SsL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/playit.gpg >/dev/null
+                  echo "deb [signed-by=/etc/apt/trusted.gpg.d/playit.gpg] https://playit-cloud.github.io/ppa/data ./" | sudo tee /etc/apt/sources.list.d/playit-cloud.list
+                  sudo apt update && sudo apt install playit
+
+            - name: Run Playit.gg Tunnel
+              env:
+                  PLAYIT_SECRET: ${{ secrets.PLAYIT_SECRET }}
               run: |
-                  warp-cli connector new  ${{secrets.CLOUDFLARE_TOKEN}}
-                  warp-cli connect
+                  echo "=========================================="
+                  echo "Starting Playit.gg tunnel for Minecraft"
+                  echo "=========================================="
+                  playit &
+                  sleep 10
+                  echo "Tunnel started! Check https://playit.gg/account/tunnels for connection address"
+                  echo "==========================================="
 
             - name: Run Server (Long)
               id: run_server
