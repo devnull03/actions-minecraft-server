@@ -11,6 +11,7 @@ on:
                 type: string
                 description: The MOTD to set in server.properties.
                 default: A Minecraft server running in \u00a79\u00a7lGitHub Actions\u00a7r\nSee \u00a76devnull03\/actions-minecraft-server
+                
 permissions:
     contents: write
 jobs:

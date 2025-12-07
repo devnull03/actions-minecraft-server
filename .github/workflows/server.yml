@@ -1,26 +1,26 @@
 name: Server Run
 on:
-    workflow_run:
-        workflows: ["Setup Server"]
-        inputs:
-            should_add_op:
-                type: boolean
-                default: false
-                description: Whether to apply the value of op_name input.
-                required: true
-            op_name:
-                type: string
-                required: false
-                description: The Minecraft username of a player to make an operator.
-                default: "devnull03"
-        types:
-            - completed
+    # workflow_run:
+        # workflows: ["Setup Server"]
+        # inputs:
+        #     should_add_op:
+        #         type: boolean
+        #         default: false
+        #         description: Whether to apply the value of op_name input.
+        #         required: true
+        #     op_name:
+        #         type: string
+        #         required: false
+        #         description: The Minecraft username of a player to make an operator.
+        #         default: "devnull03"
+        # types:
+        #     - completed
 
     workflow_dispatch:
         inputs:
             should_add_op:
                 type: boolean
-                default: false
+                # default: false
                 description: Whether to apply the value of op_name input.
                 required: true
             op_name:
@@ -28,6 +28,16 @@ on:
                 required: false
                 description: The Minecraft username of a player to make an operator.
                 default: "devnull03"
+            eula_agree:
+                type: boolean
+                required: true
+                description: Do you agree to the Minecraft EULA? https://www.minecraft.net/en-us/eula
+                default: true
+            motd:
+                type: string
+                description: The MOTD to set in server.properties.
+                default: A Minecraft server running in \u00a79\u00a7lGitHub Actions\u00a7r\nSee \u00a76devnull03\/actions-minecraft-server
+                
 concurrency:
     group: server-run
     cancel-in-progress: false
