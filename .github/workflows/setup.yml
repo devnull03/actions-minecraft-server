@@ -10,7 +10,7 @@ on:
             motd:
                 type: string
                 description: The MOTD to set in server.properties.
-                default: A Minecraft server running in \u00a79\u00a7lGitHub Actions\u00a7r\nSee \u00a76AdamRaichu\/actions-minecraft-server
+                default: A Minecraft server running in \u00a79\u00a7lGitHub Actions\u00a7r\nSee \u00a76devnull03\/actions-minecraft-server
 permissions:
     contents: write
 jobs:
@@ -25,7 +25,7 @@ jobs:
                   java-version: 21
                   distribution: "microsoft"
             - name: Generate Server Files
-              run: java -Xmx7G -jar fabric-server-mc.1.21.10-loader.0.18.1-launcher.1.1.0.jar nogui
+              run: java -Xmx7G -jar forge-1.20.1-47.4.13-installer.jar nogui
             - name: Edit eula.txt
               if: inputs.eula_agree
               run: bash ./scripts/modify-eula.sh
