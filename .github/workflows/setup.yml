@@ -26,11 +26,27 @@ jobs:
                   distribution: "microsoft"
             - name: Generate Server Files
               run: java -Xmx7G -jar forge-1.20.1-47.4.13-installer.jar --installServer
-            - name: Edit eula.txt
-              if: inputs.eula_agree
-              run: bash ./scripts/modify-eula.sh
-            - name: Change MOTD
-              run: bash ./scripts/modify-motd.sh "${{ inputs.motd }}"
+            - name: Configure Server Defaults
+              run: |
+                  # 1. Create EULA file (Required to run)
+                  echo "eula=${{ inputs.eula_agree }}" > eula.txt
+
+                  # 2. Create JVM Args file (Required for RAM)
+                  # This sets the server to use 6GB RAM when run.sh is called.
+                  echo "-Xms6G" > user_jvm_args.txt
+                  echo "-Xmx6G" >> user_jvm_args.txt
+
+                  # 3. Create empty server.properties 
+                  # (Prevents the MOTD script from failing if the file doesn't exist yet)
+                  touch server.properties
+
+                  # 4. Make the start script executable
+                  chmod +x run.sh             
+            # - name: Edit eula.txt
+            #   if: inputs.eula_agree
+            #   run: bash ./scripts/modify-eula.sh
+            # - name: Change MOTD
+            #   run: bash ./scripts/modify-motd.sh "${{ inputs.motd }}"
             - name: Save to GitHub
               run: |
                   git pull
