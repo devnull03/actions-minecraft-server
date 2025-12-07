@@ -1,30 +1,18 @@
-[03:04:14] [main/INFO]: Loading Minecraft 1.21.10 with Fabric Loader 0.18.1
-[03:04:14] [main/INFO]: Loading 4 mods:
-	- fabricloader 0.18.1
-	   \-- mixinextras 0.5.0
-	- java 21
-	- minecraft 1.21.10
-[03:04:14] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/home/runner/work/actions-minecraft-server/actions-minecraft-server/libraries/net/fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
-[03:04:19] [main/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
-[03:04:20] [main/INFO]: No existing world data, creating new world
-[03:04:21] [main/INFO]: Loaded 1461 recipes
-[03:04:21] [main/INFO]: Loaded 1574 advancements
-[03:04:21] [Server thread/INFO]: Starting minecraft server version 1.21.10
-[03:04:21] [Server thread/INFO]: Loading properties
-[03:04:21] [Server thread/INFO]: Default game type: SURVIVAL
-[03:04:21] [Server thread/INFO]: Generating keypair
-[03:04:21] [Server thread/INFO]: Starting Minecraft server on *:25565
-[03:04:21] [Server thread/INFO]: Using epoll channel type
-[03:04:21] [Server thread/INFO]: Preparing level "world"
-[03:04:21] [Server thread/INFO]: Selecting global world spawn...
-[03:04:26] [Server thread/INFO]: Loading 0 persistent chunks...
-[03:04:26] [Server thread/INFO]: Preparing spawn area: 100%
-[03:04:26] [Server thread/INFO]: Time elapsed: 4535 ms
-[03:04:26] [Server thread/INFO]: Done (4.899s)! For help, type "help"
-[03:04:26] [Server thread/INFO]: Made devnull03 a server operator
-[03:04:36] [User Authenticator #1/INFO]: UUID of player devnull03 is 4bcd2916-38f1-4dde-a2f6-cf8506d13cb0
-[03:04:42] [Server thread/INFO]: devnull03[/127.113.94.64:47241] logged in with entity id 25 at (10.5, 81.0, 9.5)
-[03:04:42] [Server thread/INFO]: devnull03 joined the game
-[03:16:18] [Server thread/INFO]: devnull03 lost connection: Disconnected
-[03:16:18] [Server thread/INFO]: devnull03 left the game
-[03:17:18] [Server thread/INFO]: Server empty for 60 seconds, pausing
+[10:54:52] [main/INFO]: Loading Minecraft 1.21.10 with Fabric Loader 0.18.1
+[10:54:52] [main/WARN]: Mod resolution failed
+[10:54:52] [main/INFO]: Immediate reason: [HARD_DEP_NO_CANDIDATE watching 1.11.2 {depends fabric-api @ [*]}, ROOT_FORCELOAD_SINGLE watching 1.11.2]
+[10:54:52] [main/INFO]: Reason: [HARD_DEP watching 1.11.2 {depends fabric-api @ [*]}]
+[10:54:52] [main/INFO]: Fix: add [add:fabric-api 1 ([(-∞,∞)])], remove [], replace []
+[10:54:52] [main/ERROR]: Incompatible mods found!
+net.fabricmc.loader.impl.FormattedException: Some of your mods are incompatible with the game or each other!
+A potential solution has been determined, this may resolve your problem:
+	 - Install fabric-api, any version.
+More details:
+	 - Mod 'From The Fog' (watching) 1.11.2 requires any version of fabric-api, which is missing!
+	at net.fabricmc.loader.impl.FormattedException.ofLocalized(FormattedException.java:51) ~[fabric-loader-0.18.1.jar:?]
+	at net.fabricmc.loader.impl.FabricLoaderImpl.load(FabricLoaderImpl.java:202) ~[fabric-loader-0.18.1.jar:?]
+	at net.fabricmc.loader.impl.launch.knot.Knot.init(Knot.java:142) ~[fabric-loader-0.18.1.jar:?]
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:66) [fabric-loader-0.18.1.jar:?]
+	at net.fabricmc.loader.impl.launch.knot.KnotServer.main(KnotServer.java:23) [fabric-loader-0.18.1.jar:?]
+	at net.fabricmc.loader.impl.launch.server.FabricServerLauncher.main(FabricServerLauncher.java:69) [fabric-loader-0.18.1.jar:?]
+	at net.fabricmc.installer.ServerLauncher.main(ServerLauncher.java:69) [fabric-server-mc.1.21.10-loader.0.18.1-launcher.1.1.0.jar:1.1.0]
