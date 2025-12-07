@@ -71,7 +71,11 @@ jobs:
 
                   # 4. Make the start script executable
                   chmod +x run.sh             
-
+            - name: Edit eula.txt
+              if: inputs.eula_agree
+              run: bash ./scripts/modify-eula.sh
+            - name: Change MOTD
+              run: bash ./scripts/modify-motd.sh "${{ inputs.motd }}"
             - name: Run Server (Long)
               id: run_server
               run: ${{inputs.should_add_op && 'printf "op ' || ''}}${{inputs.should_add_op && inputs.op_name || ''}}${{inputs.should_add_op && '" | ' || ''}} ./run.sh nogui             # Maximum workflow duration is 360 minutes.
