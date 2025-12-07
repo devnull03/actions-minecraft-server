@@ -25,7 +25,7 @@ jobs:
                   java-version: 21
                   distribution: "microsoft"
             - name: Generate Server Files
-              run: java -Xmx7G -jar forge-1.20.1-47.4.13-installer.jar nogui
+              run: java -Xmx7G -jar forge-1.20.1-47.4.13-installer.jar --installServer
             - name: Edit eula.txt
               if: inputs.eula_agree
               run: bash ./scripts/modify-eula.sh
