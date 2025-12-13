@@ -16,6 +16,10 @@ on:
                 type: boolean
                 default: false
                 description: Whether to create a new world.
+            seed:
+                type: string
+                required: false
+                description: The seed for the new world.
 concurrency:
     group: server-run
     cancel-in-progress: false
@@ -45,13 +49,20 @@ jobs:
               if: ${{ inputs.new_world }}
               run: |
                   echo "=========================================="
-                  echo "Creating new world"
+                  echo "Deleting old world folder"
                   echo "=========================================="
-                  java -Xmx6G -jar fabric-server-mc.1.21.10-loader.0.18.1-launcher.1.1.0.jar nogui
-                  echo "\n==========================================="
+                  rm -rf world
+            - name: Create New World with seed
+              if: ${{ inputs.new_world }} && ${{ inputs.seed }}
+              run: |
+                  echo "=========================================="
+                  echo "Creating new world with seed"
+                  echo "=========================================="
+                  rm -rf world
+                  sed -i 's/level-seed=.*/level-seed=${{ inputs.seed }}/' server.propertiessed -i 's/level-name=.*/level-name=new_world_name/' server.properties
             - name: Run Server (Long)
               id: run_server
-              run: ${{inputs.should_add_op && 'printf "op ' || ''}}${{inputs.should_add_op && inputs.op_name || ''}}${{inputs.should_add_op && '" | ' || ''}}java -Xmx6G -jar fabric-server-mc.1.21.10-loader.0.18.1-launcher.1.1.0.jar nogui
+              run: ${{inputs.should_add_op && 'printf "op ' || ''}}${{inputs.should_add_op && inputs.op_name || ''}}${{inputs.should_add_op && '" | ' || ''}}java -Xmx6G -jar fabric-server-mc.1.21.11-loader.0.18.2-launcher.1.1.0.jar nogui
               # Maximum workflow duration is 360 minutes.
               # Setting this prevents progress from being lost by forgetting to stop the server.
               timeout-minutes: 320
@@ -61,7 +72,7 @@ jobs:
                   git pull
                   git config user.name github-actions
                   git config user.email actions@github.com
-                  git add world/
+                  git add world|| true/
                   git add logs/
                   git add *.json
                   git add *.properties

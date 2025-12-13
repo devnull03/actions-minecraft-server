@@ -25,7 +25,7 @@ jobs:
                   java-version: 21
                   distribution: "microsoft"
             - name: Generate Server Files
-              run: java -Xmx7G -jar fabric-server-mc.1.21.10-loader.0.18.1-launcher.1.1.0.jar nogui
+              run: java -Xmx7G -jar fabric-server-mc.1.21.11-loader.0.18.2-launcher.1.1.0.jar nogui
             - name: Edit eula.txt
               if: inputs.eula_agree
               run: bash ./scripts/modify-eula.sh
