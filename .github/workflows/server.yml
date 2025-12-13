@@ -59,7 +59,12 @@ jobs:
                   echo "Creating new world with seed"
                   echo "=========================================="
                   rm -rf world
-                  sed -i 's/level-seed=.*/level-seed=${{ inputs.seed }}/' server.propertiessed -i 's/level-name=.*/level-name=new_world_name/' server.properties
+                  if [ -f server.properties ]; then
+                      sed -i 's/level-seed=.*/level-seed=${{ inputs.seed }}/' server.properties
+                  else
+                      echo "server.properties file not found. Creating a new one."
+                      echo "level-seed=${{ inputs.seed }}" > server.properties
+                  fi
             - name: Run Server (Long)
               id: run_server
               run: ${{inputs.should_add_op && 'printf "op ' || ''}}${{inputs.should_add_op && inputs.op_name || ''}}${{inputs.should_add_op && '" | ' || ''}}java -Xmx6G -jar fabric-server-mc.1.21.11-loader.0.18.2-launcher.1.1.0.jar nogui
