@@ -1,21 +1,5 @@
 name: Server Run
 on:
-    workflow_run:
-        workflows: ["Setup Server"]
-        inputs:
-            should_add_op:
-                type: boolean
-                default: false
-                description: Whether to apply the value of op_name input.
-                required: true
-            op_name:
-                type: string
-                required: false
-                description: The Minecraft username of a player to make an operator.
-                default: "devnull03"
-        types:
-            - completed
-
     workflow_dispatch:
         inputs:
             should_add_op:
@@ -28,6 +12,10 @@ on:
                 required: false
                 description: The Minecraft username of a player to make an operator.
                 default: "devnull03"
+            new_world:
+                type: boolean
+                default: false
+                description: Whether to create a new world.
 concurrency:
     group: server-run
     cancel-in-progress: false
@@ -53,7 +41,14 @@ jobs:
                   docker run -d --network host -e SECRET_KEY=${{ secrets.PLAYIT_SECRET }} ghcr.io/playit-cloud/playit-agent:0.16
                   sleep 10
                   echo "\n==========================================="
-
+            - name: Create New World ?
+              if: ${{ inputs.new_world }}
+              run: |
+                  echo "=========================================="
+                  echo "Creating new world"
+                  echo "=========================================="
+                  java -Xmx6G -jar fabric-server-mc.1.21.10-loader.0.18.1-launcher.1.1.0.jar nogui
+                  echo "\n==========================================="
             - name: Run Server (Long)
               id: run_server
               run: ${{inputs.should_add_op && 'printf "op ' || ''}}${{inputs.should_add_op && inputs.op_name || ''}}${{inputs.should_add_op && '" | ' || ''}}java -Xmx6G -jar fabric-server-mc.1.21.10-loader.0.18.1-launcher.1.1.0.jar nogui
